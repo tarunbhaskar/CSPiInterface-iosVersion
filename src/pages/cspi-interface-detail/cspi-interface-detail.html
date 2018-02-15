@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-navbar (click)="goBack()">
+    <ion-buttons left style="margin-left:-45px;">
+      <button ion-button icon-only>
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Interfaces Details</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+
+  <ion-grid>
+    <ion-row align-items-start class="header">
+      <ion-col col-4>
+        Title
+      </ion-col>
+      <ion-col col-8>
+        Details
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="showMessageCard">
+    	<ion-card >
+	<ion-item>
+		<ion-label class="message-label">Message : </ion-label>
+		<ion-input [(ngModel)]="textMessage" type="text" class="message-input"></ion-input>
+	</ion-item>
+	<ion-item>
+		<button ion-button small item-right (click) = "sendSMS()">
+			Send
+		</button>
+		<button ion-button color="light" small item-left (click) = "close()">
+			Close
+		</button>
+	</ion-item>
+</ion-card>
+    </ion-row>
+    <ion-row align-items-start class="table-row-odd">
+      <ion-col col-4 class="table-head">
+        Sourcing Interface ID
+      </ion-col>
+      <ion-col col-8>
+        {{param1.id}}
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-start class="table-row-even">
+      <ion-col col-4 class="table-head">
+        Sourcing Interface Name
+      </ion-col>
+      <ion-col col-8>
+       {{param1.title ? param1.title : ""}} {{param1.desc ? param1.desc : ""}}
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-start class="table-row-odd">
+      <ion-col col-4 class="table-head">
+        Producer
+      </ion-col>
+      <ion-col col-8>
+        <p class="poc-business" *ngIf='param1["producer.producerFirst"] !== ""'>{{param1 ? param1['producer.producerFirst'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["producer.producerSecond"]!== ""'> {{param1? param1['producer.producerSecond'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["producer.producerThird"]!== ""'> {{param1? param1['producer.producerThird'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["producer.producerFourth"] !== ""'> {{param1? param1['producer.producerFourth'] : ""}} </p>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-start class="table-row-even">
+      <ion-col col-4 class="table-head">
+        Enterprise Vend Name
+      </ion-col>
+      <ion-col col-8>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameFirst"] !== ""'>{{param1 ? param1['enterpriseVendName.vendNameFirst']: ""}} </p>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameSecond"] !== ""'>{{param1? param1['enterpriseVendName.vendNameSecond'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameThird"] !== ""'>{{param1? param1['enterpriseVendName.vendNameThird']: ""}} </p>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameFourth"] !== ""'>{{param1? param1['enterpriseVendName.vendNameFourth'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameFifth"] !== ""'>{{param1 ? param1['enterpriseVendName.vendNameFifth'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameSixth"] !== ""'>{{param1 ? param1['enterpriseVendName.vendNameSixth'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameSeventh"] !== ""'>{{param1 ? param1['enterpriseVendName.vendNameSeventh'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["enterpriseVendName.vendNameEighth"] !== ""'>{{param1 ? param1['enterpriseVendName.vendNameEighth']: ""}} </p>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-start class="table-row-odd">
+      <ion-col col-4 class="table-head">
+        END Consumer
+      </ion-col>
+      <ion-col col-8>
+        {{param1.consumer}}
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-start class="table-row-even">
+      <ion-col col-4 class="table-head">
+        Consumer POC
+      </ion-col>
+      <ion-col col-8>
+        <p class="poc"> {{param1 ? param1['POC.POCFirst'] : ""}}</p>
+        <a *ngIf='param1["POC.POCFirstContact"] !== ""' href="tel:{{param1? param1['POC.POCFirstContact'] : ''}}" class="call">
+          <ion-icon name="call" item-left></ion-icon>
+        </a>
+        <a *ngIf='param1["POC.POCFirstContact"] !== ""'>
+          <ion-icon name="text" item-left (click) = "send(param1['POC.POCFirstContact'])"></ion-icon>
+        </a>
+        <p class="poc"> {{param1 ? param1['POC.POCSecond'] : ""}} </p>
+        <a *ngIf='param1["POC.POCSecondContact"] !== ""' href="tel:{{param1? param1['POC.POCSecondContact'] : ''}}" class="call">
+          <ion-icon name="call" item-left ></ion-icon>
+        </a>
+        <a *ngIf='param1["POC.POCSecondContact"] !== ""'>
+          <ion-icon name="text" item-left (click) = "send(param1['POC.POCSecondContact'])"></ion-icon>
+        </a>
+        <p class="poc"> {{param1 ? param1['POC.POCThird'] : ""}} </p>
+        <a *ngIf='param1["POC.POCThirdContact"] !== ""' href="tel::{{param1 ? param1['POC.POCThirdContact'] : ''}}" class="call">
+          <ion-icon name="call" item-left></ion-icon>
+        </a>
+        <a *ngIf='param1["POC.POCThirdContact"] !== ""'>
+          <ion-icon name="text" item-left (click) = "send(param1['POC.POCThirdContact'])"></ion-icon>
+        </a>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-start class="table-row-odd">
+      <ion-col col-4 class="table-head">
+        Business Vending Event Type
+      </ion-col>
+      <ion-col col-8>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameFirst"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameFirst'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameSecond"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameSecond'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameThird"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameThird'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameFourth"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameFourth'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameFifth"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameFifth'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameSixth"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameSixth'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameSeventh"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameSeventh'] : ""}} </p>
+        <p class="poc-business" *ngIf='param1["businessVendEventType.businessVendNameEighth"] !== ""'>{{param1? param1['businessVendEventType.businessVendNameEighth'] : ""}} </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <p class="text-color">@Fannie Mae</p>
+</ion-footer>
